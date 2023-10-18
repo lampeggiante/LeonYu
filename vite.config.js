@@ -9,7 +9,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'https://github.com/YuXingLiang214/LeonYu',
+  base: '/LeonYu/',
   plugins: [
     vue(),
     AutoImport({ resolvers: [ElementPlusResolver()] }),
