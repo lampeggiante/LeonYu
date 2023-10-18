@@ -36,4 +36,11 @@ const router = createRouter({
   ]
 })
 
+import { useUserStore } from '@/stores'
+
+router.beforeResolve((to) => {
+  const userStore = useUserStore()
+  if (!userStore.token && to.path !== '/login') return '/login'
+})
+
 export default router

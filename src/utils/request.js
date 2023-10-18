@@ -1,18 +1,18 @@
 import axios from 'axios'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
-import { router } from '@/router'
+import router from '@/router'
 
-const baseURl = 'http://big-evetn-vue-api-t.itheima.net'
-const instance = axios.create({
-  baseURl,
-  timeOut: 10000
+const baseURL = 'http://big-event-vue-api-t.itheima.net'
+const request = axios.create({
+  baseURL,
+  timeOut: 100000
 })
 
-instance.interceptors.request.use(
+request.interceptors.request.use(
   (config) => {
     const useStore = useUserStore()
-    if (useUserStore.token) {
+    if (useStore.token) {
       config.headers.Authorization = useStore.token
     }
     return config
@@ -20,7 +20,7 @@ instance.interceptors.request.use(
   (err) => Promise.reject(err)
 )
 
-instance.interceptors.response.use(
+request.interceptors.response.use(
   (res) => {
     if (res.data.code === 0) {
       return res
@@ -39,3 +39,6 @@ instance.interceptors.response.use(
     return Promise.reject(err)
   }
 )
+
+export default request
+export { baseURL }

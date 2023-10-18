@@ -1,18 +1,12 @@
 <script setup>
-// import { useRoute, useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
-// const router = useRouter()
-// const route = useRoute()
-
-const userStore = useUserStore()
+// 中英国际处理
+import zh from 'element-plus/dist/locale/zh-cn.mjs'
 </script>
 
 <template>
-  <router-view></router-view>
-  <div>我是APP</div>
-  <p>{{ userStore.token }}</p>
-  <el-button @click="userStore.setToken('新的 token 。')">登录</el-button>
-  <el-button @click="userStore.removeToken()">退出</el-button>
+  <el-config-provider :locale="zh">
+    <router-view></router-view>
+  </el-config-provider>
 </template>
 
 <style scoped></style>
